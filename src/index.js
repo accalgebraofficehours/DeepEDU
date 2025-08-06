@@ -1,5 +1,8 @@
 import createRammerhead from "rammerhead/src/server/index.js";
 
+// Enable debug logging
+process.env.DEVELOPMENT = 'true';
+
 import { fileURLToPath } from "node:url";
 import { createServer } from "node:http";
 import { hostname } from "node:os";
@@ -38,6 +41,31 @@ function shouldRouteRh(req) {
 }
 
 app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
+    
+    // Log session creation
+    if (req.url === '/newsession' && req.method === 'GET') {
+        console.log(`[${new Date().toISOString()}] [INFO] Creating new session for IP: ${req.connection.remoteAddress || req.headers['x-forwarded-for'] || 'unknown'}`);
+        
+        // Intercept response to log the session ID
+        const originalEnd = res.end;
+        res.end = function(chunk) {
+            if (chunk && typeof chunk === 'string' && chunk.length === 32) {
+                console.log(`[${new Date().toISOString()}] [INFO] Generated session ID: ${chunk}`);
+            }
+            originalEnd.call(this, chunk);
+        };
+    }
+    
     if(shouldRouteRh(req)) rh.emit("request", req, res); else next();
 });
 

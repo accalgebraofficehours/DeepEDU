@@ -153,6 +153,7 @@ window.addEventListener("error", setError);
         document.getElementById("session-create-btn").addEventListener("click", () => {
             setError();
             api.newsession().then((id) => {
+                console.log('hello')
                 addSession(id);
                 document.getElementById("session-id").value = id;
                 document.getElementById("session-httpproxy").value = "";
