@@ -16,9 +16,9 @@
         <h1>DeepEDU</h1>
     </header>
     <div class="container mb-5">
-        <p class="mt-3 mb-3 fw">Join <a href="https://docs.google.com/document/d/1RHURHW2ES7fnRBYv_nCwtPE4t9PVxHW7I4B0XlRQ9Fw/edit?usp=sharing" target="_blank">PoodleSchool</a></p>
-        <p class="mb-0 fw-bold">Notice: inactive sessions will be deleted after 3 days or if the server shuts down and does not persist files.</p>
-        <p class="mb-3 fw-bold text-danger" id="error-text" style="display: none">Error: some text</p>
+        <p class="mt-3 mb-3 fw" id="joinmsg">Join <a href="https://docs.google.com/document/d/1RHURHW2ES7fnRBYv_nCwtPE4t9PVxHW7I4B0XlRQ9Fw/edit?usp=sharing" target="_blank">PoodleSchool</a></p>
+        <p class="mb-0 fw-bold" id="joinmsg">Notice: inactive sessions will be deleted after 3 days or if the server shuts down and does not persist files.</p>
+        <p class="mb-3 fw-bold text-danger" id="error-text" style="display: none" id="joinmsg">Error: some text</p>
         <div class="input-group mb-2" id="password-wrapper" style="display: none">
             <div class="input-group-prepend">
                 <span class="input-group-text">Enter password</span>
@@ -37,11 +37,11 @@
                 placeholder="click on 'Create new session ID' or 'Fill in existing session ID' from below">
             <button class="btn btn-secondary" type="button" id="session-create-btn">Create new session ID</button>
         </div>
-        <button class="btn btn-outline-secondary" id="session-advanced-toggle">Show advanced options</button>
+        <button class="btn btn-outline-secondary" id="session-advanced-toggle" id="joinmsg">Show advanced options</button>
         <div class="mt-2 mb-4" id="session-advanced-container" style="display: none">
             <div class="form-check mb-1">
                 <input class="form-check-input" type="checkbox" value="" id="session-shuffling">
-                <label class="form-check-label" for="session-shuffling">Enable URL Shuffling</label>
+                <label class="form-check-label" for="session-shuffling" id="joinmsg">Enable URL Shuffling</label>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">HTTP Proxy</span>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="row justify-content-center m-0">
-        <table class="table w-75 table-striped table-bordered">
+        <table class="table w-75 table-striped table-bordered" id="joinmsg">
             <thead>
                 <tr>
                     <th>Session ID</th>
